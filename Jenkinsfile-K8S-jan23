@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        registry = "211223789150.dkr.ecr.us-east-1.amazonaws.com/my-docker-repo"
+        registry = "533267228767.dkr.ecr.us-east-2.amazonaws.com/my-docker-repo"
     }
     
     stages {
@@ -28,9 +28,8 @@ pipeline {
         
         stage ("Push to ECR") {
             steps {
-                sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 211223789150.dkr.ecr.us-east-1.amazonaws.com"
-                sh "docker push 211223789150.dkr.ecr.us-east-1.amazonaws.com/my-docker-repo:latest"
-                
+                sh "aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 533267228767.dkr.ecr.us-east-2.amazonaws.com"
+                sh "docker push 533267228767.dkr.ecr.us-east-2.amazonaws.com/my-docker-repo:latest"
             }
         }
         
@@ -38,7 +37,6 @@ pipeline {
             steps {
                 withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'K8S', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
                 sh "kubectl apply -f eks-deploy-k8s.yaml"
-                    
                 }
             }
         }
