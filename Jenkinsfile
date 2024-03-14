@@ -1,4 +1,3 @@
-
 node {
   
   def image
@@ -22,7 +21,7 @@ node {
          // Build and push image with Jenkins' docker-plugin
         withDockerServer([uri: "tcp://localhost:4243"]) {
 
-            withDockerRegistry([credentialsId: "fa32f95a-2d3e-4c7b-8f34-11bcc0191d70", url: "https://index.docker.io/v1/"]) {
+            withDockerRegistry([credentialsId: "ede842c5-3e28-4e76-96dd-7f5fecfa8584", url: "https://index.docker.io/v1/"]) {
             image = docker.build("ananthkannan/mywebapp", "MyAwesomeApp")
             image.push()
             
